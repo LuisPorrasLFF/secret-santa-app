@@ -1,0 +1,20 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input id="name" type="text" matInput [formControl]="nameFormControl" placeholder="name" formControlName="name">
+        @if (nameFormControl.hasError('required')) {
+            <mat-error>Name is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input id="email" type="email" matInput [formControl]="emailFormControl" placeholder="email@example.com" formControlName="email">
+        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+        }
+        @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+        }
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="button" type="submit">Add</button>
+</form>
