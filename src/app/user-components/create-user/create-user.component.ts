@@ -4,7 +4,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from './../../models/users';
 
@@ -29,21 +28,18 @@ export class CreateUserComponent {
   nameFormControl = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  userForm = this.formBuilder.group({
-    name: '',
-    email: ''
-  });
-
   constructor(
-    private formBuilder: FormBuilder,
     private userService: UserService
   ) { }
 
   onSubmit(): void {
-    this.newUser.name = this.nameFormControl.value!;
-    this.newUser.email = this.emailFormControl.value!;
-    this.userService.addUser(this.newUser);
-    console.log(this.userService.getUsers())
-    this.userForm.reset();
+    if (this.nameFormControl.valid && this.emailFormControl.valid) {
+      this.newUser.name = this.nameFormControl.value!;
+      this.newUser.email = this.emailFormControl.value!;
+      this.userService.addUser(this.newUser);
+      console.log(this.userService.getUsers());
+      this.nameFormControl.reset();
+      this.emailFormControl.reset();
+    }
   }
 }
