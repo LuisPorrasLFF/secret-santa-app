@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    margin: 1rem;
+}
+
+th {
+    text-transform: uppercase;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.5rem 0px;
+}
