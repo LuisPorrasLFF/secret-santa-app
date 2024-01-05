@@ -19,7 +19,7 @@ export class CreateUserComponent {
   users = this.userService.getUsers();
 
   newUser: User = {
-    id: this.users.length,
+    id: 0,
     name: '',
     email: '',
     restrictions: []
