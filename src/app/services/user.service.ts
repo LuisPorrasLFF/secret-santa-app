@@ -35,6 +35,7 @@ export class UserService {
 
   editUser(user: User){
     let userIndex = this.users.findIndex(u => u.id == user.id);
+    console.log(user);
     this.users[userIndex] = user;
     this.saveUsers();
   }
