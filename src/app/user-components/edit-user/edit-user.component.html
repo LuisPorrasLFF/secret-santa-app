@@ -1,21 +1,6 @@
 <h2>Edit User</h2>
-<form (ngSubmit)="onSubmit()">
-    <mat-form-field class="form-field">
-        <mat-label>Name</mat-label>
-        <input type="text" matInput [formControl]="nameFormControl" placeholder="name">
-        @if (nameFormControl.hasError('required')) {
-            <mat-error>Name is <strong>required</strong></mat-error>
-        }
-    </mat-form-field>
-    <mat-form-field class="form-field">
-        <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="email@example.com">
-        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
-            <mat-error>Please enter a valid email address</mat-error>
-        }
-        @if (emailFormControl.hasError('required')) {
-            <mat-error>Email is <strong>required</strong></mat-error>
-        }
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="button" type="submit">Edit</button>
-</form>
+
+<app-user-form [user]="this.user" 
+    [actionName]="this.actionName"
+    (onSubmitCallback)="onSubmit($event)">
+</app-user-form>

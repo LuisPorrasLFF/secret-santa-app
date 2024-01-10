@@ -1,50 +1,40 @@
-import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from './../../models/users';
+import { UserFormComponent } from '../user-form/user-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule],
+  imports: [UserFormComponent],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.css'
 })
 export class EditUserComponent implements OnInit {
+  readonly actionName : string = "Edit";
+
   users = this.userService.getUsers();
   user: User | undefined;
 
-  nameFormControl = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const userIdFromRoute = Number(routeParams.get('userId'));
     this.user = this.users.find(user => user.id === userIdFromRoute);
-    if(this.user !== undefined){
-      this.nameFormControl.setValue(this.user.name);
-      this.emailFormControl.setValue(this.user.email);
-    }
   }
 
-  onSubmit(): void {
-    if (this.nameFormControl.valid && this.emailFormControl.valid && this.user !== undefined) {
-      this.user.name = this.nameFormControl.value!;
-      this.user.email = this.emailFormControl.value!;
+  onSubmit(user: User): void {
+    if (user !== undefined) {
+      this.user = user;
       this.userService.editUser(this.user);
-      console.log(this.userService.getUsers());
-      this.nameFormControl.reset();
-      this.emailFormControl.reset();
+      this.router.navigate(['']);
     }
   }
 }
