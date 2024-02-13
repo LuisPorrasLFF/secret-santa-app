@@ -16,26 +16,19 @@ export class UserService {
   users: User[] = [];
 
   addUser(user: User){
+    this.refreshUsers();
     user.id = this.users.length;
     this.users.push(user);
     this.saveUsers();
   }
 
   getUsers(){
-    let usersString = localStorage.getItem(usersToken);
-    if(usersString !== null){
-      let users = JSON.parse(usersString);
-      this.users = users as User[];
-    }
-    else{
-      this.users = TEST_USER_DATA;
-    }
+    this.refreshUsers();
     return this.users;
   }
 
   editUser(user: User){
     let userIndex = this.users.findIndex(u => u.id == user.id);
-    console.log(user);
     this.users[userIndex] = user;
     this.saveUsers();
   }
@@ -52,5 +45,16 @@ export class UserService {
   private saveUsers(){
     let usersString = JSON.stringify(this.users);
     localStorage.setItem(usersToken, usersString);
+  }
+
+  private refreshUsers(){
+    let usersString = localStorage.getItem(usersToken);
+    if(usersString !== null){
+      let users = JSON.parse(usersString);
+      this.users = users as User[];
+    }
+    else{
+      this.users = TEST_USER_DATA;
+    }
   }
 }
