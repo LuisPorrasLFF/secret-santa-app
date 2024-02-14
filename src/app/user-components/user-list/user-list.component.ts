@@ -21,7 +21,11 @@ export class UserListComponent{
 
   deleteUser(user: User): void {
     this.userService.removeUser(user);
-    console.log(this.users);
+  }
+
+  clearUsers(): void {
+    this.userService.clearUsers();
+    this.users = this.userService.getUsers();
   }
 
   constructor(

@@ -3,12 +3,6 @@ import { User } from './../models/users';
 
 const usersToken: string = "users";
 
-const TEST_USER_DATA: User[] = [
-  {id: 0, name: 'Test 01', email: 'test01@email.com', restrictions: []},
-  {id: 1, name: 'Test 02', email: 'test02@email.com', restrictions: []},
-  {id: 2, name: 'Test 03', email: 'test03@email.com', restrictions: []}
-]
-
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +36,11 @@ export class UserService {
     this.saveUsers();
   }
 
+  clearUsers(){
+    localStorage.clear();
+    this.refreshUsers();
+  }
+
   private saveUsers(){
     let usersString = JSON.stringify(this.users);
     localStorage.setItem(usersToken, usersString);
@@ -54,7 +53,7 @@ export class UserService {
       this.users = users as User[];
     }
     else{
-      this.users = TEST_USER_DATA;
+      this.users = [];
     }
   }
 }
