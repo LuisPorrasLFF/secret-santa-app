@@ -1,20 +1,20 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="userFrom">
     <mat-form-field class="form-field">
         <mat-label>Name</mat-label>
-        <input type="text" matInput [formControl]="nameFormControl" placeholder="name">
-        @if (nameFormControl.hasError('required')) {
+        <input type="text" matInput formControlName="name" placeholder="name">
+        @if (name?.errors?.["required"]) {
             <mat-error>Name is <strong>required</strong></mat-error>
         }
     </mat-form-field>
     <mat-form-field class="form-field">
         <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="email@example.com">
-        @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <input type="email" matInput formControlName="email" placeholder="email@example.com">
+        @if (email?.errors?.["email"] && !email?.errors?.["required"]) {
             <mat-error>Please enter a valid email address</mat-error>
         }
-        @if (emailFormControl.hasError('required')) {
+        @if (email?.errors?.["required"]) {
             <mat-error>Email is <strong>required</strong></mat-error>
         }
     </mat-form-field>
-    <button mat-raised-button color="primary" class="button" type="submit">{{actionName}}</button>
+    <button mat-raised-button color="primary" class="button" type="submit" [disabled]="userFrom.invalid">{{actionName}}</button>
 </form>

@@ -15,8 +15,6 @@ export class CreateUserComponent {
 
   readonly actionName : string = "Add";
 
-  users = this.userService.getUsers();
-
   constructor(
     private userService: UserService,
     private router: Router

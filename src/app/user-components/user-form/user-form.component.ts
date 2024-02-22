@@ -1,4 +1,4 @@
-import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,29 +19,26 @@ export class UserFormComponent implements OnInit {
 
   @Output() onSubmitCallback: EventEmitter<User> = new EventEmitter();
 
-  nameFormControl = new FormControl('', [Validators.required]);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  userFrom = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+  })
+
+  get name() {
+    return this.userFrom.get("name");
+  }
+
+  get email() {
+    return this.userFrom.get("email");
+  }
 
   ngOnInit() {
     if (this.user !== undefined) {
-      this.nameFormControl.setValue(this.user.name);
-      this.emailFormControl.setValue(this.user.email);
-    }
-    else {
-      this.user = {
-        id: 0,
-        name: '',
-        email: '',
-        restrictions: []
-      };
+      this.userFrom.setValue(this.user)
     }
   }
 
   onSubmit(): void {
-    if (this.nameFormControl.valid && this.emailFormControl.valid && this.user !== undefined) {
-      this.user.name = this.nameFormControl.value!;
-      this.user.email = this.emailFormControl.value!;
-      this.onSubmitCallback.emit(this.user);
-    }
+    this.onSubmitCallback.emit(this.userFrom.value as User);
   }
 }
