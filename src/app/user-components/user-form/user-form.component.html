@@ -5,6 +5,9 @@
         @if (name?.errors?.["required"]) {
             <mat-error>Name is <strong>required</strong></mat-error>
         }
+        @if (name?.errors?.["forbiddenName"]) {
+            <mat-error>Please enter an unique name</mat-error>
+        }
     </mat-form-field>
     <mat-form-field class="form-field">
         <mat-label>Email</mat-label>
@@ -14,6 +17,9 @@
         }
         @if (email?.errors?.["required"]) {
             <mat-error>Email is <strong>required</strong></mat-error>
+        }
+        @if (email?.errors?.["forbiddenName"]) {
+            <mat-error>Please enter an unique email</mat-error>
         }
     </mat-form-field>
     <button mat-raised-button color="primary" class="button" type="submit" [disabled]="userFrom.invalid">{{actionName}}</button>

@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { User } from './../../models/users';
+import { UserService } from '../../services/user.service';
+import { forbiddenNameValidator } from '../../directives/forbidden-name.directive';
 
 @Component({
   selector: 'app-user-form',
@@ -14,14 +16,17 @@ import { User } from './../../models/users';
   styleUrl: './user-form.component.css'
 })
 export class UserFormComponent implements OnInit {
-  @Input() user: User | undefined;
   @Input() actionName: string = '';
+  @Input() user: User | undefined;
 
   @Output() onSubmitCallback: EventEmitter<User> = new EventEmitter();
 
+  invalidNames : string[] = this.userService.getUsersNames();
+  invalidEmails : string[] = this.userService.getUsersEmails();
+
   userFrom = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required, forbiddenNameValidator(this.invalidNames)]),
+    email: new FormControl('', [Validators.required, Validators.email, forbiddenNameValidator(this.invalidEmails)]),
   })
 
   get name() {
@@ -32,9 +37,13 @@ export class UserFormComponent implements OnInit {
     return this.userFrom.get("email");
   }
 
+  constructor(
+    private userService: UserService
+  ) { }
+
   ngOnInit() {
     if (this.user !== undefined) {
-      this.userFrom.setValue(this.user)
+      this.userFrom.setValue(this.user);
     }
   }
 
