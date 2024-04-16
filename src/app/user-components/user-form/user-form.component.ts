@@ -39,6 +39,8 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.onSubmitCallback.emit(this.userFrom.value as User);
+    if(this.userFrom.valid){
+      this.onSubmitCallback.emit(this.userFrom.value as User);
+    }
   }
 }
