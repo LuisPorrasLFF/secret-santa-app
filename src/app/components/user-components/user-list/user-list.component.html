@@ -1,0 +1,31 @@
+<a mat-fab color="primary" aria-label="Add new user" href="/create">
+    <mat-icon>add</mat-icon>
+</a>
+<button mat-fab color="primary" aria-label="Clear user list" (click)="this.clearUsers()">
+    <mat-icon>clear_all</mat-icon>
+</button>
+<table>
+    <tbody>
+        <tr>
+            <th *ngFor="let column of displayedColumns">{{column}}</th>
+        </tr>
+        <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <a mat-fab color="accent" aria-label="Edit user" href="/edit/{{user.id}}">
+                    <mat-icon>edit</mat-icon>
+                </a>
+            </td>
+            <td>
+                <button mat-fab color="warn" aria-label="Delete user" type="button" (click)="this.deleteUser(user)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a *ngIf="users.length > 1" mat-flat-button color="primary" aria-label="Add restrictions" href="/restriction">
+    Add Restrictions
+</a>

@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 
-import { User } from './../../models/users';
+import { User } from './../../../models/users';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatTableModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })

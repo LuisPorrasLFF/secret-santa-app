@@ -4,9 +4,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { User } from './../../models/users';
-import { UserService } from '../../services/user.service';
-import { forbiddenNameValidator } from '../../directives/forbidden-name.directive';
+import { User } from './../../../models/users';
+import { UserService } from '../../../services/user.service';
+import { forbiddenNameValidator } from '../../../directives/forbidden-name.directive';
 
 @Component({
   selector: 'app-user-form',
