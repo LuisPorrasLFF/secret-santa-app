@@ -1,4 +1,9 @@
-<p>restriction-list works!</p>
+<div *ngFor="let user of users" style="margin: 3rem 0rem;">
+    <p><b>{{user.name}}</b> should not give to: <label *ngFor="let restriction of user.restrictions">{{users[restriction].name}} </label></p>
+    <mat-select multiple style="border: solid 1px black;">
+        <mat-option *ngFor="let option of users" (onSelectionChange)="onSelect(user, option)">{{option.name}}</mat-option>
+    </mat-select>
+</div>
 
 <a mat-flat-button color="primary" aria-label="Add restrictions" href="/result">
     Draw Your Secret Santa!

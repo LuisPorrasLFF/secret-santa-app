@@ -1,16 +1,15 @@
-<a mat-fab color="primary" aria-label="Add new user" href="/create">
+<a mat-fab color="primary" aria-label="Add new user" href="/create" style="margin-right: 1rem;">
     <mat-icon>add</mat-icon>
 </a>
 <button mat-fab color="primary" aria-label="Clear user list" (click)="this.clearUsers()">
     <mat-icon>clear_all</mat-icon>
 </button>
-<table>
+<table style="margin: 3rem 0rem;">
     <tbody>
         <tr>
             <th *ngFor="let column of displayedColumns">{{column}}</th>
         </tr>
         <tr *ngFor="let user of users">
-            <td>{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>

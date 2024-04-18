@@ -14,7 +14,7 @@ import { User } from './../../../models/users';
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent{
-  displayedColumns: string[] = ['id', 'name', 'email', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'email', 'edit', 'delete'];
 
   users: User[] = this.userService.getUsers();
 
