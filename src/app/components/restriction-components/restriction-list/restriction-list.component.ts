@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
@@ -13,12 +13,20 @@ import { User } from './../../../models/users';
   templateUrl: './restriction-list.component.html',
   styleUrl: './restriction-list.component.css'
 })
-export class RestrictionListComponent {
+export class RestrictionListComponent implements OnInit {
   users: User[] = this.userService.getUsers();
 
   constructor(
     private userService: UserService
   ) { }
+
+  ngOnInit() {
+    if(this.users.length > 0){
+      //Reset restrictions
+      this.userService.clearRestrictions();
+      this.users = this.userService.getUsers();
+    }
+  }
 
   onSelect(user: User, option: User): void {
     //Update restrictions

@@ -54,9 +54,13 @@ export class UserService {
     this.saveUsers();
   }
 
+  clearRestrictions(){
+    this.users.forEach(u => u.restrictions = []);
+    this.saveUsers();
+  }
+
   clearUsers(){
     localStorage.clear();
-    this.refreshUsers();
   }
 
   private saveUsers(){
