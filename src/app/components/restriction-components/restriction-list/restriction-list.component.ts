@@ -41,6 +41,5 @@ export class RestrictionListComponent implements OnInit {
       user.restrictions.splice(restrictionIndex, 1);
     }
     this.userService.editUser(user);
-    this.users = this.userService.getUsers();
   }
 }

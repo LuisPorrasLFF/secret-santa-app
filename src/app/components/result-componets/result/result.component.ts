@@ -25,7 +25,8 @@ export class ResultComponent implements OnInit {
         let secretFound = false;
         let secretIndex = 0;
         while(!secretFound && secretIndex < shuffledUsers.length){
-          if(this.users[userIndex].id !== shuffledUsers[secretIndex].id){
+          if(this.users[userIndex].id !== shuffledUsers[secretIndex].id 
+            && this.users[userIndex].restrictions.findIndex(i => i === shuffledUsers[secretIndex].id) === -1){
             secretSantas.push([this.users[userIndex], shuffledUsers[secretIndex]]);
             shuffledUsers.splice(secretIndex, 1);
             secretFound = true;
