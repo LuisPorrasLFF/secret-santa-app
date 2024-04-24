@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { UserService } from '../../../services/user.service';
 
 import { User } from './../../../models/users';
@@ -9,7 +10,7 @@ import { User } from './../../../models/users';
 @Component({
   selector: 'app-restriction-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatSelectModule],
+  imports: [CommonModule, MatButtonModule, MatSelectModule, MatFormFieldModule],
   templateUrl: './restriction-list.component.html',
   styleUrl: './restriction-list.component.css'
 })

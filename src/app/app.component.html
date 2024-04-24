@@ -1,6 +1,14 @@
 <main class="main">
   <div class="content">
-    <h1>{{title}}</h1>
-    <router-outlet></router-outlet>
+    <mat-card class="mb-3">
+      <mat-card-content>
+        <h1>{{title}}</h1>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
   </div>
 </main>
