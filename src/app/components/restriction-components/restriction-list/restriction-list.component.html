@@ -1,6 +1,6 @@
-<div *ngFor="let user of users" style="margin: 3rem 0rem;">
+<div *ngFor="let user of users" class="mtb-3">
     <p><b>{{user.name}}</b> should not give to:</p>
-    <mat-select multiple style="border: solid 1px black;">
+    <mat-select multiple class="select-border">
         <mat-option [disabled]="user.id === option.id" [value]="option" *ngFor="let option of users" (onSelectionChange)="onSelect(user, option)">{{option.name}}</mat-option>
     </mat-select>
 </div>
