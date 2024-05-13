@@ -22,19 +22,22 @@ export class ResultComponent implements OnInit {
       let shuffledUsers = this.shuffle(this.users);
       let secretSantas : [User, User][] = [];
       for(let userIndex = 0; userIndex < this.users.length; userIndex++){
-        let secretFound = false;
         let secretIndex = 0;
-        while(!secretFound && secretIndex < shuffledUsers.length){
-          if(this.users[userIndex].id !== shuffledUsers[secretIndex].id 
-            && this.users[userIndex].restrictions.findIndex(i => i === shuffledUsers[secretIndex].id) === -1){
-            secretSantas.push([this.users[userIndex], shuffledUsers[secretIndex]]);
-            shuffledUsers.splice(secretIndex, 1);
-            secretFound = true;
-          }
-          else{
-            secretIndex++;
-          }
+        if(this.users[userIndex].id == shuffledUsers[secretIndex].id){
+          secretIndex++;
         }
+        if(shuffledUsers.length == secretIndex){
+          //Someone has no Secret Santa!
+          //So let's swap with someone else 
+          console.log("!");
+          let t = secretSantas[0][1];
+          secretSantas[0][1] = this.users[userIndex];
+          secretSantas.push([this.users[userIndex], t]);
+        }
+        else{
+          secretSantas.push([this.users[userIndex], shuffledUsers[secretIndex]]);
+        }
+        shuffledUsers.splice(secretIndex, 1);
       }
       console.log(secretSantas);
     }

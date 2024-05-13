@@ -25,9 +25,10 @@ export class UserFormComponent implements OnInit {
   invalidEmails : string[] = this.userService.getUsersEmails();
 
   userFrom = new FormGroup({
-    name: new FormControl('', [Validators.required, forbiddenNameValidator(this.invalidNames)]),
-    email: new FormControl('', [Validators.required, Validators.email, forbiddenNameValidator(this.invalidEmails)]),
-  })
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    id: new FormControl()
+  });
 
   get name() {
     return this.userFrom.get("name");
@@ -45,6 +46,8 @@ export class UserFormComponent implements OnInit {
     if (this.user !== undefined) {
       this.userFrom.setValue(this.user);
     }
+    this.userFrom.controls.name.addValidators(forbiddenNameValidator(this.invalidNames, this.user?.name ?? ''));
+    this.userFrom.controls.email.addValidators(forbiddenNameValidator(this.invalidEmails, this.user?.email ?? ''));
   }
 
   onSubmit(): void {

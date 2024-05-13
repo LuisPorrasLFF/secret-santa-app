@@ -10,6 +10,7 @@
             <th *ngFor="let column of displayedColumns">{{column}}</th>
         </tr>
         <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>
@@ -25,6 +26,6 @@
         </tr>
     </tbody>
 </table>
-<a *ngIf="users.length > 1" mat-flat-button color="primary" aria-label="Add restrictions" href="/restriction">
-    Add Restrictions
+<a *ngIf="users.length > 2" mat-flat-button color="primary" aria-label="Add restrictions" href="/result">
+    Draw Your Secret Santa!
 </a>
